@@ -41,7 +41,6 @@
     margin: 0 auto;
     padding: 40px;
     border-radius: 5px;
-    white-space: nowrap;
     box-shadow: 0 0 10px #333;
 
     &.active {
@@ -52,12 +51,20 @@
     }
 
     h1.title {
-        margin: 0 auto 25px;
+        margin: 0 auto 7px;
         padding: 0;
         text-align: center;
         font-family: $title-font;
         font-size: 54px;
+    }
 
+    p.description {
+        font-family: $text-font;
+        margin: 0 auto 28px;
+        font-size: 13px;
+        width: 100%;
+        text-align: center;
+        color: #555;
     }
 
     label {

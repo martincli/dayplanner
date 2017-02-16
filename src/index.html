@@ -35,16 +35,17 @@
             <!-- create view -->
             <div class="create create-view preload">
                 <h1 class="title">dayplanner</h1>
+                <p class="description">Dayplanner is a venue-based day planning app.<br/>Enter a city and a date range to create a new plan.</p>
                 <form id="create-form">
-                    <label for="location-search">Location</label>
+                    <label for="location-search">Location (city)</label>
                     <input type="text" id="location-search" placeholder="Search..."/>
                     <div class="input-daterange input-group" id="datepicker">
                         <div class="date-wrapper left">
-                            <label for="start-date">Start Date</label>
+                            <label for="start-date">Start date</label>
                             <input type="text" id="start-date" name="start" placeholder="MM/DD/YYYY"/>
                         </div>
                         <div class="date-wrapper right">
-                            <label for="end-date">End Date</label>
+                            <label for="end-date">End date</label>
                             <input type="text" id="end-date" name="end" placeholder="MM/DD/YYYY"/>
                         </div>
                     </div>
@@ -78,7 +79,7 @@
                 </div>
                 <div class="planner-right">
                     <form id="venue-form" class="clear-children">
-                        <input type="text" id="venue-search" placeholder="Search for a venue or category..."/>
+                        <input type="text" autocomplete="off" id="venue-search" placeholder="Search for a venue or category..."/>
                         <button type="submit" disabled>Search</button>
                     </form>
                     <div class="results-wrapper">
