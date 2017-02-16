@@ -1,2 +1,4 @@
-# dayplanner
-Venue-based day planning app
+# Dayplanner
+Venue-based day planning app  
+
+Live demo: https://martincli.github.io/dayplanner/
