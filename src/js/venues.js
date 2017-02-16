@@ -42,6 +42,7 @@ function initVenues(planData) {
                 const venue = arr[i].venue;
 
                 const photoUrl = venue.photos.groups[0] ? venue.photos.groups[0].items[0].prefix + "300x300" + venue.photos.groups[0].items[0].suffix : './img/no-img.jpg';
+                const address = venue.location.address ? venue.location.address : 'Address unavailable';
                 const crossStreetHtml = venue.location.crossStreet ? ` <span class="cross-street">(${venue.location.crossStreet})</span>` : '';
                 const categoryHtml = venue.categories[0] ? ` <span class="divider">|</span> ${venue.categories[0].shortName}` : '';
                 
@@ -51,7 +52,7 @@ function initVenues(planData) {
                         <div class="info left">
                             <div class="name">${venue.name}</div>
                             <div class="subtitle">${getRatingHtml(venue.rating)}${categoryHtml}</div>
-                            <div class="address">${venue.location.address}${crossStreetHtml}</div>
+                            <div class="address">${address}${crossStreetHtml}</div>
                         </div>
                         <img class="photo right" src="${photoUrl}"/>
                     </div>
