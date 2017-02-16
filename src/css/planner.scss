@@ -1,0 +1,290 @@
+//============
+// header bar
+//============
+.header {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    height: 50px;
+    line-height: 50px;
+    color: #eee;
+    font-family: $text-font;
+    font-size: 24px;
+    margin-bottom: 20px;
+
+    &.active {
+        display: block;
+    }
+
+    .header-inner {
+        width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        top: -1px;
+
+        a.title {
+            text-decoration: none;
+            font-family: $title-font;
+            color: #fff;
+            margin-right: 10px;
+            transition: color 0.1s ease-in;
+
+            &:hover {
+                color: lighten($light-blue, 20%);
+            }
+        }
+
+        .plan-info {
+            font-family: $text-font;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+    }
+}
+
+//=========
+// planner
+//=========
+.planner-main {
+    width: 1000px;
+    margin: 0 auto 20px;
+    height: calc(100% - 90px);
+
+    &.active {
+        display: block;
+    }
+
+    .planner-left {
+        float: left;
+        height: 100%;
+        background: rgba(255,255,255,0.85);
+        box-sizing: border-box;
+        width: 455px;
+        padding: 15px;
+        box-shadow: 0 0 10px #333;
+    }
+    .planner-right {
+        float: right;
+        height: 100%;
+        background: rgba(255,255,255,0.85);
+        box-sizing: border-box;
+        width: 530px;
+        padding: 15px;
+        box-shadow: 0 0 10px #333;
+
+        #venue-form {            
+            #venue-search {
+                float: left;
+                outline: none;
+                width: 350px;
+                height: 24px;
+                line-height: 24px;
+                margin-bottom: 15px;
+                padding: 10px 10px 10px 50px;
+                background: white url('./img/search.png') left center no-repeat;
+                border: 1px solid #999;
+                border-radius: 5px;
+                font-family: $text-font;
+                font-size: 18px;
+                color: #333;
+                transition: box-shadow 0.1s ease-in;
+
+                &:focus {
+                    box-shadow: 0 0 4px $light-blue;
+                }
+            }
+
+            button {
+                float: right;
+                height: 42px;
+                line-height: 42px;
+                position: relative;
+                top: 2px;
+                padding: 0 15px;
+                border: none;
+                border-radius: 5px;
+                background: $dark-blue;
+                color: #fff;
+                font-family: $text-font;
+                font-size: 16px;
+                outline: none;
+                transition: background 0.1s ease-in;
+
+                &:disabled {
+                    opacity: 0.5;
+                }
+
+                &:not([disabled]):hover {
+                    background: darken($dark-blue, 10%);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .results-wrapper {
+            position: relative;
+            height: calc(100% - 61px);
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            .instructions {
+                @include vertical-center;
+                top: 45%;
+                margin: 0 auto;
+                text-align: center;
+                width: 360px;
+                font-family: $text-font;
+                line-height: 1.5;
+                color: #888;
+            }
+        }
+    }
+}
+
+//===========
+// draggable
+//===========
+.ui-draggable-helper {
+    background: #eee;
+    opacity: 0.65;
+    box-shadow: 0 0 5px #333;
+}
+
+.result {
+    width: 483px; // calc(100% - 20px)
+    border-bottom: 1px solid #bbb;
+    padding: 15px 15px 15px 5px;
+    cursor: pointer;
+    transition: background 0.1s ease-in;
+    font-family: $text-font;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: rgba(255,255,255,0.55);
+    }
+
+    .index {
+        font-weight: bold;
+        position: relative;
+        top: 3px;
+        width: 20px;
+        margin-right: 15px;
+        text-align: right;
+    }
+
+    .info {
+        width: 290px;
+        padding-right: 10px;
+
+        .name {
+            font-weight: bold;
+            font-size: 20px;
+            color: $main-blue;
+            margin-bottom: 2px;
+        }
+
+        .subtitle {
+            margin-bottom: 10px;
+            font-size: 12px;
+
+            .divider {
+                color: #666;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+        }
+
+        .address {
+            margin-bottom: 10px;
+            font-size: 14px;
+
+            .cross-street {
+                display: block;
+                font-size: 12px;
+                color: #777;
+            }
+        }
+    }
+
+    .photo {
+        display: block;
+        width: 120px;
+        height: 120px;
+        border: 1px solid #aaa;
+    }
+}
+
+//========================
+// fullcalendar overrides
+//========================
+.fc {
+    font-family: $text-font;
+
+    th {
+        border: none !important;
+    }
+    td {
+        border-color: #bbb !important;
+    }
+    button {
+        height: 30px;
+        background: none;
+        border: none;
+        text-shadow: none;
+        box-shadow: none;
+        outline: none;
+        padding: 0 5px;
+        transition: color 0.1s ease-in;
+        &:disabled {
+            opacity: 0.2;
+            cursor: default;
+        }
+        &.fc-state-hover {
+            color: $main-blue;
+        }
+    }
+    .fc-head .fc-head-container {
+        display: none;
+    }
+    .fc-toolbar.fc-header-toolbar {
+        height: 30px;
+        margin-bottom: 10px;
+
+        .fc-center {
+            height: 100%;
+            h2 {
+                font-size: 18px;
+                @include vertical-center;
+                top: 51%;
+            }
+        }
+    }
+    .fc-day {
+        background: #fcf8e3;
+    }
+    .fc-day-header {
+        padding: 5px;
+    }
+    .fc-axis.fc-time {
+        font-size: 14px;
+    }
+    .fc-icon-left-single-arrow:after,
+    .fc-icon-right-single-arrow:after {
+        font-size: 40px;
+    }
+    .fc-event {
+        padding: 5px;
+        background-color: $main-blue;
+        border: 1px solid $dark-blue;
+
+        .fc-time {
+            margin-bottom: 1px;
+            font-size: 12px;
+        }
+    }
+    .fc-cell-overlay {
+        opacity: 1 !important; 
+    }
+}

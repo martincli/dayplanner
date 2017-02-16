@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Dayplanner</title>
+        <link rel="shortcut icon" href="${require('./img/favicon.ico')}" type="image/x-icon"/>
+
+        <!-- fonts/icons -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Brawler|Noto+Sans"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+        <!-- jquery ui styles -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
+
+        <!-- datepicker + fullcalendar styles -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"/>
+    </head>
+    <body style="display: none;">
+        <!-- modal -->
+        <div class="backdrop">
+            <div class="modal preload">
+                <div class="content"></div>
+                <i class="fa fa-times close-btn"></i>
+            </div>
+        </div>
+
+        <!-- mobile message -->
+        <div class="mobile">
+            <i class="fa fa-exclamation-circle"></i>
+            <p>This app is not intended for use on devices with smaller screens. Please open it in a desktop browser to continue.</p>
+        </div>
+        
+        <div class="wrapper">
+            <!-- create view -->
+            <div class="create create-view preload">
+                <h1 class="title">dayplanner</h1>
+                <form id="create-form">
+                    <label for="location-search">Location</label>
+                    <input type="text" id="location-search" placeholder="Search..."/>
+                    <div class="input-daterange input-group" id="datepicker">
+                        <div class="date-wrapper left">
+                            <label for="start-date">Start Date</label>
+                            <input type="text" id="start-date" name="start" placeholder="MM/DD/YYYY"/>
+                        </div>
+                        <div class="date-wrapper right">
+                            <label for="end-date">End Date</label>
+                            <input type="text" id="end-date" name="end" placeholder="MM/DD/YYYY"/>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <button type="submit" disabled>Create New</button>
+                </form>
+            </div>
+            <div class="sidebar-icon create-view planner-view">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <div class="sidebar create-view planner-view preload">
+                <h2 class="sidebar-title">Saved Plans</h2>
+                <div class="plans"></div>
+                <div class="footer">
+                    <hr/>
+                    <a class="home-icon" href="./index.html"><i class="fa fa-home"></i></a>
+                    <a class="github-icon" href="https://github.com/martincli/dayplanner"><i class="fa fa-github"></i></a>
+                </div>
+            </div>
+
+            <!-- planner view -->
+            <div class="header planner-view">
+                <div class="header-inner">
+                    <a class="title" href="./index.html">dayplanner</a> »
+                    <span class="plan-info"></span>
+                </div>
+            </div>
+            <div class="planner-main planner-view clear-children">
+                <div class="planner-left">
+                    <div class="fullcalendar"></div>
+                </div>
+                <div class="planner-right">
+                    <form id="venue-form" class="clear-children">
+                        <input type="text" id="venue-search" placeholder="Search for a venue or category..."/>
+                        <button type="submit" disabled>Search</button>
+                    </form>
+                    <div class="results-wrapper">
+                        <div class="instructions">
+                            Search for venues, drag them to the schedule on the left, and edit the schedule as you see fit.
+                        </div>
+                        <div class="venues-loading-wrapper" style="display:none;">
+                            <div class="loading"></div>
+                        </div>
+                        <div class="results"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jquery + jquery ui -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- autocomplete + map -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0vrH6XWuHmdefj5y5Uqe4cDDhZYk8NhI&libraries=places"></script>
+
+        <!-- datepicker -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+
+        <!-- momentjs -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+        <!-- fullcalendar -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+    </body>
+</html>

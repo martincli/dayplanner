@@ -1,0 +1,25 @@
+//================
+// mobile message
+//================
+.mobile {
+    display: none;
+    @include vertical-center();
+    background: rgba(255,255,255,0.85);
+    width: 500px;
+    max-width: 60%;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #333;
+    font-family: $text-font;
+    text-align: center;
+
+    .fa-exclamation-circle {
+        margin-bottom: 15px;
+        font-size: 30px;
+    }
+
+    @media screen and (max-width: 992px) {
+        display: block;
+    }    
+}

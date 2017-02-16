@@ -1,0 +1,35 @@
+@import 'global';
+@import 'modal';
+@import 'mobile';
+@import 'create';
+@import 'sidebar';
+@import 'planner'; // calendar + venues
+
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #4c4648 url('./img/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #222;
+}
+
+//============
+// view logic
+//============
+.create-view,
+.planner-view {
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    .create-view,
+    .planner-view,
+    .confirm-backdrop {
+        display: none !important;
+    }
+}

@@ -1,0 +1,154 @@
+//==============
+// sidebar icon
+//==============
+.sidebar-icon {
+    z-index: 999;
+    position: absolute;
+    right: 3.5%;
+    bottom: 5%;
+    background: #dedede;
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 0 0 10px #333;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease,
+                color 0.1s ease-in;
+
+    &.active {
+        display: block;
+    }
+    &.shifted {
+        transform: translateX(-380px);
+    }
+    &:hover {
+        color: $main-blue;
+    }
+
+    .fa-calendar {
+        @include vertical-center;
+        font-size: 24px;
+        margin-top: -1px;
+    }
+}
+
+//=========
+// sidebar
+//=========
+.sidebar {
+    z-index: 999;
+    display: none;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    float: right;
+    box-sizing: border-box;
+    padding: 30px;
+    padding-right: 0;
+    background: #dedede;
+    transform: translateX(380px);
+
+    &.active {
+        display: block;
+    }
+    &.opened {
+        transform: translateX(0);
+        box-shadow: 0 0 10px #333;
+    }
+    &:not(.preload) {
+        transition: transform 0.3s ease;
+    }
+
+    h2.sidebar-title {
+        font-family: $title-font;
+        font-size: 22px;
+        margin: 0;
+        margin-bottom: 24px;
+        padding: 0;
+    }
+
+    .plans {
+        font-family: $text-font;
+        overflow: auto;
+        height: calc(100% - 135px);
+        margin-bottom: 135px;
+        padding-right: 30px;
+
+        .plan-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+
+            .plan {
+                display: block;
+                padding-right: 20px;
+                color: $main-blue;
+                text-decoration: none;
+                transition: color 0.1s ease-in;
+
+                &:hover {
+                    color: darken($main-blue, 15%);
+                }
+
+                .location {
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-bottom: 2px;
+                }
+
+                .date {
+                    font-size: 14px;
+                }
+            }
+
+            .delete-icon {
+                font-size: 18px;
+                position: relative;
+                top: 1px;
+                cursor: pointer;
+                display: block;
+                margin-top: 2px;
+                transition: color 0.1s ease-in;
+
+                &:hover {
+                    color: #C40000;
+                }
+            }
+        }
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 25px;
+        width: 340px;
+        text-align: center;
+
+        hr {
+            width: 70%;
+            border: none;
+            border-bottom: 2px solid #bbb;
+            margin: 0 auto 15px;
+        }
+
+        .home-icon, .github-icon {
+            color: #343434;
+            font-size: 36px;
+            margin-right: 20px;
+            cursor: pointer;
+            transition: color 0.1s ease-in;
+
+            &:hover {
+                color: $main-blue;
+            }
+        }
+
+        a:last-child {
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,85 @@
+//===========
+// variables
+//===========
+$dark-blue:   #206596;
+$light-blue:  #2D97E3;
+$main-blue:   #176EAD;
+$title-font:  'Brawler', sans-serif;
+$text-font:   'Noto Sans', sans-serif;
+
+//========
+// resets
+//========
+p {
+   margin: 0;
+   padding: 0;
+}
+
+//========
+// floats
+//========
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+.clear-children:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+//========
+// mixins
+//========
+@mixin vertical-center () {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+//====================
+// loading animations
+//====================
+.venues-loading-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%,-50%);
+
+    .loading {
+        display: block;
+        width: 80px;
+        height: 80px;
+        border-radius: 80px;
+        box-shadow: 0 4px 0 0 #92bced;
+        animation: spinner 1s linear infinite;
+    }
+}
+.modal-loading-wrapper {
+    width: 60px;
+    margin: 0 auto;
+
+    .loading {
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 60px;
+        box-shadow: 0 4px 0 0 #92bced;
+        animation: spinner 1s linear infinite;
+    }
+}
+@keyframes spinner {
+    0% {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
