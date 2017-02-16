@@ -58,7 +58,7 @@ export function hideModal() {
 // has eventId -> for calendar
 export function populateVenueModal(data, eventId) {
     const venue = data.response.venue;
-    const categories = venue.categories.map(category => category.shortName).join(', ');
+    const categoriesHtml = venue.categories.length > 0 ? ` <span class="divider">|</span> ${venue.categories.map(category => category.shortName).join(', ')}` : '';
     const address = venue.location.formattedAddress.join('<br/>');
     const websiteHtml = venue.url ? `<div class="website"><i class="fa fa-globe"></i> <a href="${venue.url}">${venue.url}</a></div>` : '';
     const phoneHtml = venue.contact.formattedPhone ? `<div class="phone"><i class="fa fa-phone"></i> ${venue.contact.formattedPhone}</div>` : '';
@@ -72,7 +72,7 @@ export function populateVenueModal(data, eventId) {
     setModalContent(`
         <div class="venue-info left">
             <div class="name">${venue.name}</div>
-            <div class="subtitle">${getRatingHtml(venue.rating)} <span class="divider">|</span> ${categories}</div>
+            <div class="subtitle">${getRatingHtml(venue.rating)}${categoriesHtml}</div>
             <div class="address">${address}</div>
             ${websiteHtml}
             ${phoneHtml}

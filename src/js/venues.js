@@ -43,13 +43,14 @@ function initVenues(planData) {
 
                 const photoUrl = venue.photos.groups[0] ? venue.photos.groups[0].items[0].prefix + "300x300" + venue.photos.groups[0].items[0].suffix : './img/no-img.jpg';
                 const crossStreetHtml = venue.location.crossStreet ? ` <span class="cross-street">(${venue.location.crossStreet})</span>` : '';
+                const categoryHtml = venue.categories[0] ? ` <span class="divider">|</span> ${venue.categories[0].shortName}` : '';
                 
                 resultsHtml += `
                     <div class="result clear-children" data-venue-id="${venue.id}" data-venue-name="${venue.name}">
                         <div class="index left">${i+1}.</div>
                         <div class="info left">
                             <div class="name">${venue.name}</div>
-                            <div class="subtitle">${getRatingHtml(venue.rating)} <span class="divider">|</span> ${venue.categories[0].shortName}</div>
+                            <div class="subtitle">${getRatingHtml(venue.rating)}${categoryHtml}</div>
                             <div class="address">${venue.location.address}${crossStreetHtml}</div>
                         </div>
                         <img class="photo right" src="${photoUrl}"/>
