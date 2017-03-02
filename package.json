@@ -1,5 +1,5 @@
 {
-  "name": "template-webpack",
+  "name": "filterable-notes",
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",

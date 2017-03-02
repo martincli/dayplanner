@@ -8,26 +8,26 @@ const wrapper  = document.querySelector('.wrapper');
 // modal click events
 backdrop.addEventListener('click', function() { hideModal(); });
 closeBtn.addEventListener('click', function() { hideModal(); });
-modal.addEventListener('click', (ev) => { 
+modal.addEventListener('click', (ev) => {
     ev.stopPropagation();
-    if(ev.target.classList.contains('close-confirm-modal')) {
+    if (ev.target.classList.contains('close-confirm-modal')) {
         hideModal();
     }
 
     // delete plan
-    if(ev.target.classList.contains('confirm-delete-plan')) {
+    if (ev.target.classList.contains('confirm-delete-plan')) {
         const planId = ev.target.dataset.planId;
         const urlParams = new URLSearchParams(window.location.search);
         document.querySelector(`.plan-wrapper[data-plan-id="${planId}"]`).remove();
         localStorage.removeItem(planId);
         hideModal();
-        if(urlParams.get('id') === planId) {
+        if (urlParams.get('id') === planId) {
             window.location = './index.html';
         }
     }
 
     // remove event
-    if(ev.target.classList.contains('remove-event-btn')) {
+    if (ev.target.classList.contains('remove-event-btn')) {
         const eventId = ev.target.dataset.eventId;
         $('.fullcalendar').fullCalendar('removeEvents', eventId);
         hideModal();
@@ -46,13 +46,13 @@ export function setModalContent(val) {
 export function showModal() {
     backdrop.classList.add('active');
     modal.classList.add('active');
-    wrapper.classList.add('modal-active');   
+    wrapper.classList.add('modal-active');
 }
 
 export function hideModal() {
     backdrop.classList.remove('active');
     modal.classList.remove('active');
-    wrapper.classList.remove('modal-active'); 
+    wrapper.classList.remove('modal-active');
 }
 
 // has eventId -> for calendar
@@ -64,7 +64,7 @@ export function populateVenueModal(data, eventId) {
     const phoneHtml = venue.contact.formattedPhone ? `<div class="phone"><i class="fa fa-phone"></i> ${venue.contact.formattedPhone}</div>` : '';
     let buttonHtml = '';
 
-    if(eventId) {
+    if (eventId) {
         buttonHtml = `<button class="remove-event-btn" data-event-id="${eventId}">Remove Event</button>`;
     }
 
@@ -92,6 +92,7 @@ export function populateVenueModal(data, eventId) {
         center: loc,
         mapTypeControl: false
     });
+    // eslint-disable-next-line no-unused-vars
     const marker = new google.maps.Marker({
         position: loc,
         map: map

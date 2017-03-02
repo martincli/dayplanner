@@ -21,12 +21,12 @@ function initCreate() {
         const place = autocomplete.getPlace();
         if (place.geometry) {
             locationSelected = true;
-            if (dateSelected) { 
+            if (dateSelected) {
                 submitButton.disabled = false;
             }
         }
     });
-    locationField.addEventListener('input', function() { 
+    locationField.addEventListener('input', function() {
         locationSelected = false;
         submitButton.disabled = true;
     });
@@ -48,7 +48,7 @@ function initCreate() {
         startDate: '-0d'
     }).on('changeDate', function() {
         dateSelected = true;
-        if(locationSelected) {
+        if (locationSelected) {
             submitButton.disabled = false;
         }
     });
@@ -57,7 +57,6 @@ function initCreate() {
     createForm.addEventListener('submit', function(ev) {
         ev.preventDefault();
         const location = locationField.value;
-        const place = autocomplete.getPlace();
         const startDate = startDateField.value;
         const endDate = endDateField.value;
         const planId = hashids.encode(Date.now());
@@ -69,7 +68,7 @@ function initCreate() {
             startDate: new Date(startDate),
             endDate: new Date(endDate),
             events: []
-        }
+        };
         localStorage.setItem(planId, JSON.stringify(planObj));
 
         // redirect to planner view
@@ -77,7 +76,7 @@ function initCreate() {
     });
 
     // show create view
-    createViewElements.forEach((el) => { el.classList.add('active') });
+    createViewElements.forEach((el) => { el.classList.add('active'); });
 }
 
 export default initCreate;
