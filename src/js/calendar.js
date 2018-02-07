@@ -44,6 +44,7 @@ function initCalendar(planData) {
             drop: function(date) {
                 const eventObj = {
                     title: this.dataset.venueName,
+                    venueName: this.dataset.venueName,
                     venueId: this.dataset.venueId,
                     start: date,
                     end: date.clone().add('2', 'hours')
@@ -62,7 +63,7 @@ function initCalendar(planData) {
                 `);
                 $.get(`https://api.foursquare.com/v2/venues/${event.venueId}?client_id=${clientId}&client_secret=${clientSecret}&v=${verDate}`)
                 .done(function(data) {
-                    populateVenueModal(data, event._id);
+                    populateVenueModal(data, event._id, event.title);
                 });
                 showModal();
             },
@@ -78,6 +79,7 @@ function initCalendar(planData) {
                 for (const event of events) {
                     const newEvent = {};
                     newEvent.title = event.title;
+                    newEvent.venueName = event.venueName; 
                     newEvent.venueId = event.venueId;
                     newEvent.start = event.start;
                     newEvent.end = event.end;

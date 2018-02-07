@@ -4,9 +4,10 @@ import initSidebar  from './sidebar';
 import initCalendar from './calendar';
 import initVenues   from './venues';
 
-// if (process.env.NODE_ENV !== 'production') {
-//     require('../index.html');
-// }
+if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line global-require
+    require('../index.html');
+}
 
 const urlParams = new URLSearchParams(window.location.search);
 

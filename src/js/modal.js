@@ -5,7 +5,7 @@ const modal    = document.querySelector('.modal');
 const closeBtn = modal.querySelector('.close-btn');
 const wrapper  = document.querySelector('.wrapper');
 
-// modal click events
+// modal event listeners
 backdrop.addEventListener('click', function() { hideModal(); });
 closeBtn.addEventListener('click', function() { hideModal(); });
 modal.addEventListener('click', (ev) => {
@@ -32,7 +32,45 @@ modal.addEventListener('click', (ev) => {
         $('.fullcalendar').fullCalendar('removeEvents', eventId);
         hideModal();
     }
+
+    // edit event name
+    if (ev.target.classList.contains('edit-title-btn')) {
+        document.querySelector('.title-wrapper').style.display = 'none';  
+        document.querySelector('.edit-title-form').style.display = 'block';
+        const input = document.querySelector('.edit-title-input');
+        input.value = ev.target.dataset.title;
+        input.select();
+    }
+
+    // cancel event name edit
+    if (ev.target.classList.contains('edit-title-cancel-btn')) {
+        document.querySelector('.edit-title-form').style.display = 'none';
+        document.querySelector('.title-wrapper').style.display = 'block';
+    }
 });
+
+// submit event name edit
+modal.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    if (ev.target.classList.contains('edit-title-form')) {
+        titleFormSubmit(ev.target.dataset.eventId);
+    }
+});
+modal.addEventListener('blur', (ev) => {
+    if (ev.target.classList.contains('edit-title-input')) {
+        titleFormSubmit(ev.target.parentNode.dataset.eventId);
+    }
+}, true);
+function titleFormSubmit(eventId) {
+    const eventObj = $('.fullcalendar').fullCalendar('clientEvents', eventId)[0];
+    const newTitle = document.querySelector('.edit-title-input').value;
+    eventObj.title = newTitle;
+    $('.fullcalendar').fullCalendar('updateEvent', eventObj);
+    document.querySelector('.event-title').innerHTML = newTitle;
+    document.querySelector('.edit-title-btn').dataset.title = newTitle;
+    document.querySelector('.title-wrapper').style.display = 'block';
+    document.querySelector('.edit-title-form').style.display = 'none';
+}
 
 export function setModalSize(width, height) {
     modal.style.width = width;
@@ -56,22 +94,33 @@ export function hideModal() {
 }
 
 // has eventId -> for calendar
-export function populateVenueModal(data, eventId) {
+export function populateVenueModal(data, eventId, title) {
     const venue = data.response.venue;
     const categoriesHtml = venue.categories.length > 0 ? ` <span class="divider">|</span> ${venue.categories.map(category => category.shortName).join(', ')}` : '';
     const address = venue.location.formattedAddress.join('<br/>');
     const websiteHtml = venue.url ? `<div class="website"><i class="fa fa-globe"></i> <a href="${venue.url}">${venue.url}</a></div>` : '';
     const phoneHtml = venue.contact.formattedPhone ? `<div class="phone"><i class="fa fa-phone"></i> ${venue.contact.formattedPhone}</div>` : '';
+
+    let titleHtml = `<div class="venue-name">${venue.name}</div>`;
     let buttonHtml = '';
 
     if (eventId) {
+        titleHtml = `
+            <div class="title-wrapper">
+                <span class="event-title">${title}</span> <i class="fa fa-pencil edit-title-btn" data-title="${title}"></i>
+            </div>
+            <form class="edit-title-form" data-event-id="${eventId}">
+                <input type="text" class="edit-title-input">
+                <input type="button" class="edit-title-cancel-btn" value="&#10006">
+            </form>
+            <div class="venue-name">${venue.name}</div>`;
         buttonHtml = `<button class="remove-event-btn" data-event-id="${eventId}">Remove Event</button>`;
     }
 
     // populate modal content
     setModalContent(`
         <div class="venue-info left">
-            <div class="name">${venue.name}</div>
+            ${titleHtml}
             <div class="subtitle">${getRatingHtml(venue.rating)}${categoriesHtml}</div>
             <div class="address">${address}</div>
             ${websiteHtml}
