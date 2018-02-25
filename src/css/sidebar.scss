@@ -4,15 +4,14 @@
 .sidebar-icon {
     z-index: 999;
     position: absolute;
-    right: 3.5%;
-    bottom: 5%;
+    right: 30px;
+    bottom: 30px;
     background: #dedede;
     height: 60px;
     width: 60px;
     border-radius: 50px;
     text-align: center;
     box-shadow: 0 0 10px #333;
-    margin-bottom: 15px;
     cursor: pointer;
     transition: transform 0.3s ease,
                 color 0.1s ease-in;

@@ -16,7 +16,7 @@
     }
 
     .header-inner {
-        width: 1000px;
+        width: 950px;
         margin: 0 auto;
         position: relative;
         top: -1px;
@@ -45,7 +45,7 @@
 // planner
 //=========
 .planner-main {
-    width: 1000px;
+    width: 950px;
     margin: 0 auto 20px;
     height: calc(100% - 90px);
 
@@ -58,7 +58,7 @@
         height: 100%;
         background: rgba(255,255,255,0.85);
         box-sizing: border-box;
-        width: 455px;
+        width: 430px;
         padding: 15px;
         box-shadow: 0 0 10px #333;
     }
@@ -67,7 +67,7 @@
         height: 100%;
         background: rgba(255,255,255,0.85);
         box-sizing: border-box;
-        width: 530px;
+        width: 500px;
         padding: 15px;
         box-shadow: 0 0 10px #333;
 
@@ -75,7 +75,7 @@
             #venue-search {
                 float: left;
                 outline: none;
-                width: 350px;
+                width: 320px;
                 height: 24px;
                 line-height: 24px;
                 margin-bottom: 15px;
@@ -150,7 +150,7 @@
 }
 
 .result {
-    width: 478px;
+    display: flex;
     border-bottom: 1px solid #bbb;
     padding: 15px 15px 15px 5px;
     cursor: pointer;
