@@ -31,7 +31,7 @@ function initVenues(planData) {
         instructions.style.display = 'none';
         loading.style.display = 'block';
 
-        $.get(`https://api.foursquare.com/v2/venues/explore?client_id=${clientId}&client_secret=${clientSecret}&v=${verDate}&near=${location}&query=${venueSearch.value}&limit=${limit}&venuePhotos=1`)
+        $.get(`https://api.foursquare.com/v2/venues/explore?client_id=${clientId}&client_secret=${clientSecret}&v=${verDate}&near=${location}&query=${venueSearch.value}&limit=${limit}`)
         .done(function(data) {
             const arr = data.response.groups[0].items;
             let resultsHtml = '';
@@ -40,7 +40,7 @@ function initVenues(planData) {
             for (let i = 0, len = arr.length; i < len; i++) {
                 const venue = arr[i].venue;
 
-                const photoUrl = venue.photos.groups[0] ? `${venue.photos.groups[0].items[0].prefix}300x300${venue.photos.groups[0].items[0].suffix}` : './img/no-img.jpg';
+                const iconUrl = `${venue.categories[0].icon.prefix}bg_88${venue.categories[0].icon.suffix}`;
                 const address = venue.location.address ? venue.location.address : 'Address unavailable';
                 const crossStreetHtml = venue.location.crossStreet ? ` <span class="cross-street">(${venue.location.crossStreet})</span>` : '';
                 const categoryHtml = venue.categories[0] ? ` <span class="divider">|</span> ${venue.categories[0].shortName}` : '';
@@ -53,7 +53,7 @@ function initVenues(planData) {
                             <div class="subtitle">${getRatingHtml(venue.rating)}${categoryHtml}</div>
                             <div class="address">${address}${crossStreetHtml}</div>
                         </div>
-                        <img class="photo right" src="${photoUrl}"/>
+                        <img class="icon right" src="${iconUrl}"/>
                     </div>
                 `;
             }
