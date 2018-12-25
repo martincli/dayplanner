@@ -209,6 +209,7 @@
 .wrapper {
     height: 100%;
     transition: filter 0.15s;
+    overflow: hidden;
     
     &.modal-active {
         filter: blur(5px);
