@@ -1,5 +1,4 @@
 import { setModalSize, setModalContent, showModal, populateVenueModal } from './modal';
-import { getRatingHtml } from './helpers';
 
 function initVenues(planData) {
     const venueForm    = document.getElementById('venue-form');
@@ -16,41 +15,40 @@ function initVenues(planData) {
     const limit        = 30;
 
     // submit button status
-    venueSearch.addEventListener('keyup', function() {
-        if (this.value.length > 0) {
-            submitButton.disabled = false;
-        } else {
-            submitButton.disabled = true;
-        }
+    venueSearch.addEventListener('keyup', ev => {
+        submitButton.disabled = ev.target.value.length === 0;
     });
 
     // submit venue search form
-    venueForm.addEventListener('submit', function(ev) {
+    venueForm.addEventListener('submit', ev => {
         ev.preventDefault();
         results.innerHTML = '';
         instructions.style.display = 'none';
         loading.style.display = 'block';
 
-        $.get(`https://api.foursquare.com/v2/venues/explore?client_id=${clientId}&client_secret=${clientSecret}&v=${verDate}&near=${location}&query=${venueSearch.value}&limit=${limit}`)
-        .done(function(data) {
+        fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${clientId}&client_secret=${clientSecret}&v=${verDate}&near=${location}&query=${venueSearch.value}&limit=${limit}`)
+        .then(res => res.json())
+        .then(data => {
             const arr = data.response.groups[0].items;
             let resultsHtml = '';
 
             // loop through results and populate html
-            for (let i = 0, len = arr.length; i < len; i++) {
+            for (let i=0, len=arr.length; i<len; i++) {
                 const venue = arr[i].venue;
+
+                console.log(venue);
 
                 const iconUrl = `${venue.categories[0].icon.prefix}bg_88${venue.categories[0].icon.suffix}`;
                 const address = venue.location.address ? venue.location.address : 'Address unavailable';
                 const crossStreetHtml = venue.location.crossStreet ? ` <span class="cross-street">(${venue.location.crossStreet})</span>` : '';
-                const categoryHtml = venue.categories[0] ? ` <span class="divider">|</span> ${venue.categories[0].shortName}` : '';
+                const categoryHtml = venue.categories[0] ? venue.categories[0].name : '';
 
                 resultsHtml += `
                     <div class="result clear-children" data-venue-id="${venue.id}" data-venue-name="${venue.name}">
                         <div class="index left">${i + 1}.</div>
                         <div class="info left">
                             <div class="name">${venue.name}</div>
-                            <div class="subtitle">${getRatingHtml(venue.rating)}${categoryHtml}</div>
+                            <div class="subtitle">${categoryHtml}</div>
                             <div class="address">${address}${crossStreetHtml}</div>
                         </div>
                         <img class="icon right" src="${iconUrl}"/>
@@ -81,18 +79,22 @@ function initVenues(planData) {
     });
 
     // click on results
-    $(results).on('click', '.result', function() {
-        setModalSize('570px', 'auto');
-        setModalContent(`
-            <div class="modal-loading-wrapper">
-                <div class="loading"></div>
-            </div>
-        `);
-        $.get(`https://api.foursquare.com/v2/venues/${this.dataset.venueId}?client_id=${clientId}&client_secret=${clientSecret}&v=${verDate}`)
-        .done(function(data) {
-            populateVenueModal(data);
-        });
-        showModal();
+    results.addEventListener('click', ev => {
+        const result = ev.target.closest('.result');
+        if (result) {
+            setModalSize('570px', 'auto');
+            setModalContent(`
+                <div class="modal-loading-wrapper">
+                    <div class="loading"></div>
+                </div>
+            `);
+            fetch(`https://api.foursquare.com/v2/venues/${result.dataset.venueId}?client_id=${clientId}&client_secret=${clientSecret}&v=${verDate}`)
+            .then(res => res.json())
+            .then(data => {
+                populateVenueModal(data);
+            });
+            showModal();
+        }
     });
 }
 

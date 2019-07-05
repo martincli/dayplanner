@@ -17,7 +17,7 @@ function initCreate() {
     const hashids = new Hashids();
 
     // only enable submit button if location and dates are selected
-    autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener('place_changed', () => {
         const place = autocomplete.getPlace();
         if (place.geometry) {
             locationSelected = true;
@@ -26,15 +26,15 @@ function initCreate() {
             }
         }
     });
-    locationField.addEventListener('input', function() {
+    locationField.addEventListener('input', () => {
         locationSelected = false;
         submitButton.disabled = true;
     });
-    startDateField.addEventListener('input', function() {
+    startDateField.addEventListener('input', () => {
         dateSelected = false;
         submitButton.disabled = true;
     });
-    endDateField.addEventListener('input', function() {
+    endDateField.addEventListener('input', () => {
         dateSelected = false;
         submitButton.disabled = true;
     });
@@ -54,7 +54,7 @@ function initCreate() {
     });
 
     // submit form
-    createForm.addEventListener('submit', function(ev) {
+    createForm.addEventListener('submit', ev => {
         ev.preventDefault();
         const location = locationField.value;
         const startDate = startDateField.value;
@@ -76,7 +76,7 @@ function initCreate() {
     });
 
     // show create view
-    createViewElements.forEach((el) => { el.classList.add('active'); });
+    createViewElements.forEach(el => { el.classList.add('active'); });
 }
 
 export default initCreate;

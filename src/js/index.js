@@ -13,8 +13,9 @@ const urlParams = new URLSearchParams(window.location.search);
 
 // planner view
 if (urlParams.has('id') && localStorage.getItem(urlParams.get('id'))) {
-    initCalendar(JSON.parse(localStorage.getItem(urlParams.get('id'))));
-    initVenues(JSON.parse(localStorage.getItem(urlParams.get('id'))));
+    const planData = JSON.parse(localStorage.getItem(urlParams.get('id')));
+    initCalendar(planData);
+    initVenues(planData);
     initSidebar();
     showBody();
 }

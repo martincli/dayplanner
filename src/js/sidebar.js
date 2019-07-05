@@ -8,18 +8,18 @@ function initSidebar() {
     const plans = [];
 
     // delay transition effects until first hover
-    sidebarIcon.addEventListener('mouseover', function() {
+    sidebarIcon.addEventListener('mouseover', () => {
         sidebar.classList.remove('preload');
         modal.classList.remove('preload');
     }, { once: true });
 
-    sidebarIcon.addEventListener('click', function() {
-        this.classList.toggle('shifted');
+    sidebarIcon.addEventListener('click', ev => {
+        ev.currentTarget.classList.toggle('shifted');
         sidebar.classList.toggle('opened');
     });
 
     // delete plan
-    sidebar.addEventListener('click', function(ev) {
+    sidebar.addEventListener('click', ev => {
         const el = ev.target;
         if (el.classList.contains('delete-icon')) {
             setModalSize('400px', 'auto');
@@ -34,7 +34,7 @@ function initSidebar() {
 
     // parse saved plans
     const keys = Object.keys(localStorage);
-    for (let i = 0, len = keys.length; i < len; i++) {
+    for (let i=0, len=keys.length; i<len; i++) {
         const plan = localStorage[keys[i]];
         const data = JSON.parse(plan);
 
@@ -56,9 +56,9 @@ function initSidebar() {
 
     // sort + show saved plans
     plans.sort((a, b) =>
-        a.startDate.getTime() > b.startDate.getTime()
+        a.startDate.getTime() - b.startDate.getTime()
     )
-    .forEach((plan) => {
+    .forEach(plan => {
         $(plansDiv).append(`
             <div class="plan-wrapper" data-plan-id="${plan.id}">
                 <a class="plan" href="${window.location.href.split('?')[0]}?id=${plan.id}">

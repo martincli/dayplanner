@@ -6,9 +6,9 @@ const closeBtn = modal.querySelector('.close-btn');
 const wrapper  = document.querySelector('.wrapper');
 
 // modal event listeners
-backdrop.addEventListener('click', function() { hideModal(); });
-closeBtn.addEventListener('click', function() { hideModal(); });
-modal.addEventListener('click', (ev) => {
+backdrop.addEventListener('click', hideModal);
+closeBtn.addEventListener('click', hideModal);
+modal.addEventListener('click', ev => {
     ev.stopPropagation();
     if (ev.target.classList.contains('close-confirm-modal')) {
         hideModal();
@@ -35,7 +35,7 @@ modal.addEventListener('click', (ev) => {
 
     // edit event name
     if (ev.target.classList.contains('edit-title-btn')) {
-        document.querySelector('.title-wrapper').style.display = 'none';  
+        document.querySelector('.title-wrapper').style.display = 'none';
         document.querySelector('.edit-title-form').style.display = 'block';
         const input = document.querySelector('.edit-title-input');
         input.value = ev.target.dataset.title;
@@ -50,17 +50,19 @@ modal.addEventListener('click', (ev) => {
 });
 
 // submit event name edit
-modal.addEventListener('submit', (ev) => {
+modal.addEventListener('submit', ev => {
     ev.preventDefault();
     if (ev.target.classList.contains('edit-title-form')) {
         titleFormSubmit(ev.target.dataset.eventId);
     }
 });
-modal.addEventListener('blur', (ev) => {
+
+modal.addEventListener('blur', ev => {
     if (ev.target.classList.contains('edit-title-input')) {
         titleFormSubmit(ev.target.parentNode.dataset.eventId);
     }
 }, true);
+
 function titleFormSubmit(eventId) {
     const eventObj = $('.fullcalendar').fullCalendar('clientEvents', eventId)[0];
     const newTitle = document.querySelector('.edit-title-input').value;

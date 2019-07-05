@@ -18,7 +18,7 @@ function initCalendar(planData) {
     planInfo.textContent = `${planData.location} (${startDateText} – ${endDateText})`;
 
     // show planner view
-    plannerViewElements.forEach((el) => { el.classList.add('active'); });
+    plannerViewElements.forEach(el => { el.classList.add('active'); });
 
     // initialize fullcalendar
     $(document).ready(function() {
@@ -79,7 +79,7 @@ function initCalendar(planData) {
                 for (const event of events) {
                     const newEvent = {};
                     newEvent.title = event.title;
-                    newEvent.venueName = event.venueName; 
+                    newEvent.venueName = event.venueName;
                     newEvent.venueId = event.venueId;
                     newEvent.start = event.start;
                     newEvent.end = event.end;
@@ -91,7 +91,7 @@ function initCalendar(planData) {
         });
 
         // handle window resize
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', () => {
             $('.fullcalendar').fullCalendar('option', 'height', $(plannerLeft).height());
         });
 
@@ -112,18 +112,18 @@ function initCalendar(planData) {
             nextButton.disabled = true;
             nextButton.classList.remove('fc-state-hover');
         }
-        prevButton.addEventListener('click', function() {
+        prevButton.addEventListener('click', ev => {
             if (currentDay === 2) {
-                this.disabled = true;
-                this.classList.remove('fc-state-hover');
+                ev.currentTarget.disabled = true;
+                ev.currentTarget.classList.remove('fc-state-hover');
             }
             nextButton.disabled = false;
             currentDay--;
         });
-        nextButton.addEventListener('click', function() {
+        nextButton.addEventListener('click', ev => {
             if (currentDay === totalDays - 1) {
-                this.disabled = true;
-                this.classList.remove('fc-state-hover');
+                ev.currentTarget.disabled = true;
+                ev.currentTarget.classList.remove('fc-state-hover');
             }
             prevButton.disabled = false;
             currentDay++;
